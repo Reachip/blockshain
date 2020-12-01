@@ -4,9 +4,10 @@ use std::cell::RefCell;
 use serde::{Serialize, Serializer};
 use sha2::{Digest, Sha256};
 use uuid::Uuid;
+use serde::Deserialize;
 use serde::ser::SerializeStruct;
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, Deserialize)]
 pub struct BlockHash {
     data: String,
     signature: String,
