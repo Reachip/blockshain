@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::block::Block;
 
-#[derive(Debug, PartialEq, Eq, Serialize)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Key {
     IsOkay,
     AddBlock,
@@ -11,7 +11,7 @@ pub enum Key {
     NewMiner,
 }
 
-#[derive(Debug, PartialEq, Eq, Serialize)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Value {
     Message(String),
     BoolMessage(bool),
