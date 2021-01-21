@@ -1,11 +1,11 @@
 extern crate sha2;
 
 use std::cell::RefCell;
+
 use serde::{Serialize, Serializer};
-use sha2::{Digest, Sha256};
-use uuid::Uuid;
 use serde::Deserialize;
 use serde::ser::SerializeStruct;
+use sha2::{Digest, Sha256};
 
 #[derive(Clone, Debug, Default, Deserialize)]
 pub struct BlockHash {

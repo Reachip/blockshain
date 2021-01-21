@@ -1,13 +1,9 @@
-use std::collections::HashMap;
-use std::hash::Hash;
-
 use serde::ser::{Serialize, Serializer, SerializeStruct};
 
 use crate::block::Block;
-use crate::client::Client;
+use crate::client::client::Client;
 
 use super::message::*;
-use std::io;
 
 pub struct Signal<'a> {
     from: &'a Client,

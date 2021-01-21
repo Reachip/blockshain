@@ -7,7 +7,6 @@ use std::str;
 
 use serde::Deserialize;
 use serde::ser::{Serialize, Serializer, SerializeStruct};
-use sha2::{Digest, Sha256};
 use uuid::Uuid;
 
 use crate::hash::BlockHash;
