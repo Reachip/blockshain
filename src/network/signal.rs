@@ -1,7 +1,9 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
+use serde::Deserialize;
 use serde::ser::{Serialize, Serializer, SerializeStruct};
+use serde::de::*;
 
 use crate::block::Block;
 use crate::client::Client;
@@ -9,30 +11,30 @@ use crate::client::Client;
 use super::message::*;
 use std::io;
 
-pub struct Signal<'a> {
-    from: &'a Client,
-    key: Key,
-    value: Value,
+#[derive(Debug, Deserialize)]
+pub struct Signal {
+    pub from_socket_path: String,
+    pub key: Key,
+    pub value: Value,
 }
 
-impl<'a> Serialize for Signal<'a> {
+impl<'a> Serialize for Signal {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
         where
             S: Serializer,
     {
         let mut s = serializer.serialize_struct("Signal", 3)?;
-        s.serialize_field("from", &self.from.client_socket_id)?;
+        s.serialize_field("from_socket_path", &self.from_socket_path)?;
         s.serialize_field("key", &self.key)?;
         s.serialize_field("value", &self.value)?;
         s.end()
     }
 }
 
-
-impl<'a> Signal<'a> {
-    pub fn new(from: &'a Client, key: Key, value: Value) -> Self {
+impl Signal {
+    fn new(from: &Client, key: Key, value: Value) -> Self {
         Signal {
-            from,
+            from_socket_path: from.client_socket_path.clone(),
             key,
             value,
         }
